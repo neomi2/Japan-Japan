@@ -1,8 +1,23 @@
 import { Meal } from "../models/mealModel.js"
 
+export const getTotalPages = async (req, res) => { 
+    let limit = req.query.limit || 2;
+    try {
+        let count = await Meal.countDocuments();
+        let totalPages = Math.ceil(count / limit);
+        return res.Json({ totalPages });
+    } catch (err) {
+        return res.status(500).Json({
+            title: "Error retrieving total pages", message: err
+        });
+    }
+}
+
 export const getMeals = async (req, res) => {
+    let limit = req.query.limit || 2;
+    let page = req.query.page || 1;
   try {
-      let meals = await Meal.find({})
+      let meals = await Meal.find({}).skip((page-1)*limit).limit(limit)
       return res.json(meals)
   } catch (err) {
       return res.status(500).json({ title: "Error retrieving meals", message: err })
