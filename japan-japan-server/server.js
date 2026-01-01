@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose from "mongoose"; // ⬅️ להוסיף
+import mongoose from "mongoose"; 
 import mealRoutes from "./routes/mealRoutes.js";
 
 const app = express();
