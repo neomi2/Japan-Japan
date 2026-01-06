@@ -3,7 +3,7 @@ import { Meal } from "../models/mealModel.js";
 
 // Get total number of pages (for pagination)
 export const getTotalPages = async (req, res) => {
-  let limit = req.query.limit || 2; // Number of items per page
+  let limit = req.query.limit || 6; // Number of items per page
   try {
     let count = await Meal.countDocuments(); // Count all meals
     let totalPages = Math.ceil(count / limit);
@@ -18,7 +18,7 @@ export const getTotalPages = async (req, res) => {
 
 // Get meals with pagination
 export const getMeals = async (req, res) => {
-  let limit = req.query.limit || 2; // Items per page
+  let limit = req.query.limit || 6; // Items per page
   let page = req.query.page || 1;   // Current page
   try {
     let meals = await Meal.find({})
