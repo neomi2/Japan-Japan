@@ -6,7 +6,7 @@ const mealSchema = new mongoose.Schema({
     mealprice:{type:Number,required: true},//mealprice is required
     mealImage: { type: String, default: '' } //default is ''
 
-
+ 
 })
 
 export const Meal=mongoose.model('meals',mealSchema);// Creating a model that work with meals in the database 

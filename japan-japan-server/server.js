@@ -1,17 +1,21 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import mongoose from "mongoose"; 
+import cors from "cors";
 import mealRoutes from "./routes/mealRoutes.js";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
-// ⬇️ החיבור למונגו – כאן בדיוק
 mongoose
-  .connect(
-    "mongodb+srv://n0504142320_db_user:U3TgdSihsS9SnlNY@japanjapancluster.nshrxll.mongodb.net/"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
