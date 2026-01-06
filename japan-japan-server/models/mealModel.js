@@ -8,5 +8,5 @@ const mealSchema = new mongoose.Schema({
 
  
 })
-
-export const Meal=mongoose.model('meals',mealSchema);// Creating a model that work with meals in the database 
+ 
+export const Meal = mongoose.model('Meal', mealSchema, 'meals');// Creating a model that work with meals in the database 
