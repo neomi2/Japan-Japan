@@ -21,9 +21,9 @@ export const getMeals = async (req, res) => {
   let limit = req.query.limit || 10; // Items per page
   let page = req.query.page || 1; // Current page
   try {
-    let meals = await Meal.find({})
-      .skip((page - 1) * limit)
-      .limit(limit);
+    let meals = await Meal.find({}, "mealname mealDescription mealprice mealImage mealCategory")
+    .skip((page - 1) * limit)
+    .limit(limit);  
     return res.json(meals);
   } catch (err) {
     return res.status(500).json({
