@@ -6,4 +6,4 @@ router.post('/', addUser);
 router.post('/login', login);
 router.get('/', getUsers);
 
-export default router; 
+export default router;      

@@ -10,4 +10,4 @@ router.post('/', createMeal);
 router.delete('/:id', deleteMeal);
 router.put('/:id', updateMeal);
 
-export default router;
+export default router; 

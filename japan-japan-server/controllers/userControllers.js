@@ -1,18 +1,18 @@
-import { userModel } from "../models/user.js";
-import {hashSync, compareSync } from "bcryptjs"
+import { userModel } from "../models/userModel.js";
+import { hashSync, compareSync } from "bcryptjs";
 
 export const addUser = (req, res) => { 
     if (!req.body)//Check if the client sent any data
         return res.status(400).json({ title: "missing body", message: "no data" })
-    let { userName, userPassword, userEmail} = req.body// Get the username, password and email from the request
-    if (!userName || !userPassword || !userEmail)//if one of the username, password, email is missing
-        return res.status(400).json({ title: "missing data", message: "username, password, email are required" })
+    let { userName,userLastName, userPassword, userEmail} = req.body// Get the username, password and email from the request
+    if (!userName || !userLastName|| !userPassword || !userEmail)//if one of the username, password, email is missing
+        return res.status(400).json({ title: "missing data", message: "username ,userLastName, password, email are required" })
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;// Check if the email is in a valid format
     if (!emailRegex.test(userEmail)) {//Checking if the email is invalid
         return res.status(400).json({
             title: "invalid email", message: "email format is not valid"
         })
-    } 
+    }  
     
 
     userModel.findOne({ userEmail }).then(alreadyexist => {

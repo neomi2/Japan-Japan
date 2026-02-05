@@ -5,6 +5,9 @@ import express from "express";
 import mongoose from "mongoose"; 
 import cors from "cors";
 import mealRoutes from "./routes/mealRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +21,9 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use("/meals", mealRoutes);
+app.use("/users", userRoutes);
+app.use("/orders",orderRoutes );
+
 
 app.get("/", (req, res) => {
   res.send("japan japan page!");
