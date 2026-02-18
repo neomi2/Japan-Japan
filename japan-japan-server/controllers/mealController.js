@@ -11,7 +11,7 @@ export const getTotalPages = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       title: "Error retrieving total pages",
-      message: err, 
+      message: err,
     });
   }
 };
@@ -21,9 +21,10 @@ export const getMeals = async (req, res) => {
   let limit = req.query.limit || 10; // Items per page
   let page = req.query.page || 1; // Current page
   try {
-    let meals = await Meal.find({}, "mealname mealDescription mealprice mealImage mealCategory")
-    .skip((page - 1) * limit)
-    .limit(limit);  
+    let meals = await Meal.find({})
+      .skip((page - 1) * limit)
+      .limit(limit);
+
     return res.json(meals);
   } catch (err) {
     return res.status(500).json({
@@ -37,7 +38,7 @@ export const getMeals = async (req, res) => {
 export const getMealById = async (req, res) => {
   try {
     const { id } = req.params;
-    let meal = await Meal.findOne({ id }); // Can also be retrieved using findById
+    let meal = await Meal.findById(id); // Can also be retrieved using findById
     if (!meal)
       return res.status(404).json({
         title: "no such meal",
@@ -51,7 +52,7 @@ export const getMealById = async (req, res) => {
     });
   }
 };
-
+ 
 // Create a new meal
 export const createMeal = async (req, res) => {
   try {
@@ -62,10 +63,17 @@ export const createMeal = async (req, res) => {
         message: "no data",
       });
 
-    let { mealname, mealDescription, mealprice,mealImage ,mealCategory} = req.body;
+    let { mealname, mealDescription, mealprice, mealImage, mealCategory } =
+      req.body;
 
     // Validate required fields
-    if (!mealname || !mealDescription || !mealprice ||!mealImage || !mealCategory)
+    if (
+      !mealname ||
+      !mealDescription ||
+      !mealprice ||
+      !mealImage ||
+      !mealCategory
+    )
       return res.status(400).json({
         title: "missing data",
         message: "name, description, price are required",
@@ -85,7 +93,7 @@ export const createMeal = async (req, res) => {
         title: "duplicate meal",
         message: "a meal with the same name and description already exists",
       });
-
+ 
     // Create and save new meal
     const newMeal = new Meal({
       mealname,
@@ -112,7 +120,7 @@ export const deleteMeal = async (req, res) => {
     let meal = await Meal.findByIdAndDelete(id);
 
     if (!meal)
-      return res.status(404).json({ 
+      return res.status(404).json({
         title: "error deleting",
         message: "meal not found",
       });
@@ -167,3 +175,19 @@ export const updateMeal = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

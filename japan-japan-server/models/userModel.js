@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, enum: ['USER', 'ADMIN'], default: 'USER' },//only ADMIN or USER values are allowed, default is USER
     createdAt: { type: Date, default: Date.now },// Date when the user was created,default is now
 
- 
+  
 }) 
 
 export const userModel=mongoose.model('users',userSchema);// Creating a model that work with users in the database  
